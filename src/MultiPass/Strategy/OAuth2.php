@@ -29,7 +29,7 @@ class OAuth2
 
   public function callback_phase()
   {
-    if (isset($_GET['error']) || isset($_GET['error_reason']) {
+    if (isset($_GET['error']) || isset($_GET['error_reason'])) {
       $error_reason = (!empty($_GET['error_reason']))                                           ? $_GET['error_reason'] :
                      ((isset($_GET['error_description']) && !empty($_GET['error_description'])) ? $_GET['error_description'] :
                                                                                                   '');
