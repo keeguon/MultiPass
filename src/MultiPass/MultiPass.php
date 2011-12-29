@@ -17,7 +17,7 @@ class MultiPass
     unset($opts['client_id'], $opts['client_secret']);
 
     // Instanciate provider
-    $this->provider = new \MultiPass\Strategy\$provider($client_id, $client_secret, $opts);
+    $this->provider = new \MultiPass\Strategy\\$provider($client_id, $client_secret, $opts);
   }
 
   public function callback_phase()
