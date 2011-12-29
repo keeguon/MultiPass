@@ -4,7 +4,7 @@ namespace MultiPass;
 
 class MultiPass
 {
-  protected
+  public
       $provider = null
   ;
 
