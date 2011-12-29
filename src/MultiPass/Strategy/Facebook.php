@@ -2,7 +2,7 @@
 
 namespace MultiPass\Strategy;
 
-class Facebook extends \MultiPasss\Strategy\OAuth2
+class Facebook extends \MultiPass\Strategy\OAuth2
 {
   const DEFAULT_SCOPE = 'email,offline_access';
 
