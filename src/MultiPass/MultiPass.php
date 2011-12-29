@@ -5,7 +5,7 @@ namespace MultiPass;
 class MultiPass
 {
   protected
-      $provider = null;
+      $provider = null
   ;
 
   public function __construct($provider, $opts)
