@@ -8,7 +8,7 @@ class Facebook extends \MultiPasss\Strategy\OAuth2
 
   public function __construct($client_id, $client_secret, $opts)
   {
-    $this->options = array_merge(array(
+    $this->options = array_merge_recursive(array(
         'client_options'       => array(
             'site'      => 'https://graph.facebook.com'
           , 'token_url' => '/oauth/access_token'

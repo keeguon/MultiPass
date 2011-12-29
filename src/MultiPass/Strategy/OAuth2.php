@@ -16,7 +16,7 @@ class OAuth2
   public function __construct($client_id, $client_secret, $opts)
   {
     // Default options
-    $this->options = array_merge(array(
+    $this->options = array_merge_recursive(array(
         'client_options'       => array()
       , 'token_params'         => array()
       , 'access_token_options' => array()
