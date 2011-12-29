@@ -36,7 +36,7 @@ class OAuth2
       throw new \MultiPass\CallbackError($_GET['error'], $error_reason, $_GET['error_uri']);
     }
 
-    $this->token = $this->client->auth_code()->get_token($_GET['code'], $this->options['token_params']);
+    $this->token = $this->client->auth_code()->get_token($_GET['code'], $this->options['token_params'], $this->options['access_token_params']);
     if ($this->token->is_expired()) {
       $this->token->refresh();
     }
