@@ -1,0 +1,6 @@
+[submodule "vendor/oauth2-php"]
+	path = vendor/oauth2-php
+	url = git://github.com/Keeguon/oauth2-php.git
+[submodule "vendor/Symfony/Component/ClassLoader"]
+	path = vendor/Symfony/Component/ClassLoader
+	url = git://github.com/symfony/ClassLoader.git
