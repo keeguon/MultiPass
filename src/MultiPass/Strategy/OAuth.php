@@ -24,7 +24,7 @@ class OAuth
     ), $opts);
 
     // Instantiate client
-    $this->client = new \OAuth($client, $client_secret, $this->options['client_options']['signature_method'], $this->options['client_options']['auth_type']);
+    $this->client = new \OAuth($client_id, $client_secret, $this->options['client_options']['signature_method'], $this->options['client_options']['auth_type']);
   }
 
   public function auth_hash()
