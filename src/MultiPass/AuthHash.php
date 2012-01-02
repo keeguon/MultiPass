@@ -23,6 +23,6 @@ class AuthHash
 
   public function toArray()
   {
-    return array_merge(array('provider' => $this->provider, 'uid' => $this->uid), $info, $credentials, $raw_info);
+    return array_merge_recursive(array('provider' => $this->provider, 'uid' => $this->uid), $this->info, $this->credentials, $this->raw_info);
   }
 }
