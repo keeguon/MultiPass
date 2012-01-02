@@ -18,7 +18,7 @@ class OAuth
     // Default options
     $this->options = array_replace_recursive(array(
         'client_options' => array(
-          , 'auth_type'         => OAUTH_AUTH_TYPE_AUTHORIZATION
+            'auth_type'         => OAUTH_AUTH_TYPE_AUTHORIZATION
           , 'signature_method'  => OAUTH_SIG_METHOD_HMACSHA1
         )
     ), $opts);
