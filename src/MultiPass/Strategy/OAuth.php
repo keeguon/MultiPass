@@ -42,7 +42,7 @@ class OAuth
     try {
       // Fetch access token
       $this->client->setToken($_GET['oauth_token'], $_SESSION['oauth'][$this->name]['oauth_token_secret']);
-      $access_token = $this->client->getAccessToken($this->options['client_options']['access_token_url']);
+      $access_token = $this->client->getAccessToken($this->options['client_options']['site'].$this->options['client_options']['access_token_url']);
 
       // Store access token informations
       $_SESSION['oauth'][$this->name] = array(
