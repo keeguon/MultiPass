@@ -46,7 +46,7 @@ class OAuth
 
       // Store access token informations
       $_SESSION['oauth'][$this->name] = array(
-          'oauth_token'        => $access_token['oauth_token'];
+          'oauth_token'        => $access_token['oauth_token']
         , 'oauth_token_secret' => $access_token['oauth_token_secret']
       );
 
