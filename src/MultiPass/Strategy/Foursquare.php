@@ -38,7 +38,7 @@ class Foursquare extends \MultiPass\Strategy\OAuth2
     return array(
         'first_name' => $raw_info['firstName']
       , 'last_name'  => $raw_info['lastName']
-      , 'image'      => $raw_info['picture']
+      , 'image'      => $raw_info['photo']
     );
   }
 
