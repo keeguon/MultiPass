@@ -32,15 +32,6 @@ class Facebook extends \MultiPass\Strategy\OAuth2
     parent::__construct($client_id, $client_secret, $this->options);
   }
 
-  public function credentials()
-  {
-    return array(
-        'token'      => $this->token->token
-      , 'expires'    => $this->token->expires()
-      , 'expires_at' => $this->token->expires() ? $this->token->expires_at : null
-    );
-  }
-
   public function info($raw_info = null)
   {
     $raw_info = $raw_info ?: $this->raw_info();
