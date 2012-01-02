@@ -10,7 +10,7 @@ class OAuth2
 
   public
       $client = null
-    , $name   = ''
+    , $name   = 'OAuth2'
     , $token  = null
   ;
 
@@ -24,9 +24,6 @@ class OAuth2
       , 'authorize_options'    => array()
     ), $opts);
 
-    // Other properties
-    $this->name = get_class();
-
     // Instanciate client
     $this->client = new \OAuth2\Client($client_id, $client_secret, $this->options['client_options']);
   }
@@ -36,7 +33,7 @@ class OAuth2
     $raw_info = $this->raw_info();
     $hash = new \MultiPass\AuthHash($this->name, $raw_info['id']);
     $hash->info        = $this->info($raw_info);
-    $hahs->credentials = $this->credentials();
+    $hash->credentials = $this->credentials();
     $hash->raw_info    = $raw_info;
     return $hash;
   }

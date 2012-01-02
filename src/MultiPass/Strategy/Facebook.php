@@ -6,6 +6,10 @@ class Facebook extends \MultiPass\Strategy\OAuth2
 {
   const DEFAULT_SCOPE = 'email,offline_access';
 
+  public
+      $name = 'Facebook'
+  ;
+
   public function __construct($client_id, $client_secret, $opts)
   {
     $this->options = array_merge_recursive(array(
