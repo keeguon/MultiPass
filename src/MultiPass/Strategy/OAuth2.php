@@ -44,7 +44,7 @@ class OAuth2
       $error_reason = (!empty($_GET['error_reason']))                                           ? $_GET['error_reason'] :
                      ((isset($_GET['error_description']) && !empty($_GET['error_description'])) ? $_GET['error_description'] :
                                                                                                   '');
-      throw new \MultiPass\Error\CallbackError($_GET['error'], $error_reason, $_GET['error_uri']);
+      throw new \MultiPass\Error\CallbackError($_GET['error'], $error_reason, $_GET['error_uri'] ?: null);
     }
 
     $this->token = $this->client->auth_code()->get_token($_GET['code'], $this->options['token_params'], $this->options['access_token_options']);
