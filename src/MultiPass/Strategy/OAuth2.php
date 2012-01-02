@@ -40,16 +40,20 @@ class OAuth2
 
   public function callback_phase()
   {
-    if (isset($_GET['error']) || isset($_GET['error_reason'])) {
-      $error_reason = (!empty($_GET['error_reason']))                                           ? $_GET['error_reason'] :
-                     ((isset($_GET['error_description']) && !empty($_GET['error_description'])) ? $_GET['error_description'] :
-                                                                                                  '');
-      throw new \MultiPass\Error\CallbackError($_GET['error'], $error_reason, isset($_GET['error_uri']) ? $_GET['error_uri'] : null);
-    }
+    try {
+      if (isset($_GET['error']) || isset($_GET['error_reason'])) {
+        $error_reason = (!empty($_GET['error_reason']))                                           ? $_GET['error_reason'] :
+                       ((isset($_GET['error_description']) && !empty($_GET['error_description'])) ? $_GET['error_description'] :
+                                                                                                    '');
+        throw new \MultiPass\Error\CallbackError($_GET['error'], $error_reason, isset($_GET['error_uri']) ? $_GET['error_uri'] : null);
+      }
 
-    $this->token = $this->client->auth_code()->get_token($_GET['code'], $this->options['token_params'], $this->options['access_token_options']);
-    if ($this->token->is_expired()) {
-      $this->token->refresh();
+      $this->token = $this->client->auth_code()->get_token($_GET['code'], $this->options['token_params'], $this->options['access_token_options']);
+      if ($this->token->is_expired()) {
+        $this->token->refresh();
+      }
+    } catch (\Exception $e) {
+      print_r($e);
     }
   }
 
