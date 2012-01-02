@@ -16,6 +16,7 @@ class Foursquare extends \MultiPass\Strategy\OAuth2
             'site'          => 'https://foursquare.com'
           , 'token_url'     => '/oauth2/access_token'
           , 'authorize_url' => '/oauth2/authenticate'
+          , 'token_method'  => 'GET'
         )
       , 'token_params'         => array(
             'parse' => 'json'
