@@ -42,8 +42,12 @@ class Foursquare extends \MultiPass\Strategy\OAuth2
 
   protected function raw_info()
   {
-    $response       = $this->token->get($this->client->site.'/v2/users/self', array('parse' => 'json'));
-    $parsedResponse = $response->parse();
-    return $parsedResponse['response']['user'];
+    try {
+      $response       = $this->token->get('https://api.foursquare.com/v2/users/self', array('parse' => 'json'));
+      $parsedResponse = $response->parse();
+      return $parsedResponse['response']['user'];
+    } catch (\Exception $e) {
+      print_r($e);
+    }
   }
 }
