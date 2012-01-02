@@ -21,7 +21,10 @@ class Foursquare extends \MultiPass\Strategy\OAuth2
       , 'token_params'         => array(
             'parse' => 'json'
         )
-      , 'access_token_options' => array()
+      , 'access_token_options' => array(
+            'mode'       => 'query'
+          , 'param_name' => 'oauth_token'
+        )
       , 'authorize_options'    => array()
     ), $opts);
 
