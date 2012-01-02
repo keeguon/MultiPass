@@ -70,7 +70,7 @@ class OAuth
 
       // Store the OAuth Token and the OAuth Token Secret in the session
       $_SESSION['oauth'][$this->name] = array(
-          'oauth_token'        => $request_token['oauth_token'];
+          'oauth_token'        => $request_token['oauth_token']
         , 'oauth_token_secret' => $request_token['oauth_token_secret']
       );
 
