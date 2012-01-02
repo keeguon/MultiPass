@@ -61,7 +61,7 @@ class OAuth
   {
     try {
       // Fetch request token
-      $request_token = $this->client->getRequestToken($this->options['client_options']['site'].$this->options['client_options']['request_token_url'], isset($this->options['client_options']['oauth_callback']) ? $this->options['client_options']['oauth_callback'] : '');
+      $request_token = $this->client->getRequestToken($this->options['client_options']['site'].$this->options['client_options']['request_token_url'], isset($this->options['client_options']['oauth_callback']) ? $this->options['client_options']['oauth_callback'] : 'oob');
 
       // Throw exception if the callback isn't confirmed
       if (!in_array($request_token['oauth_callback_confirmed'], array(true, "true"))) {
