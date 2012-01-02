@@ -27,4 +27,40 @@ class Facebook extends \MultiPass\Strategy\OAuth2
 
     parent::__construct($client_id, $client_secret, $this->options);
   }
+
+  public function credentials()
+  {
+    return array(
+        'token'      => $this->token->token
+      , 'expires'    => $this->token->expires()
+      , 'expires_at' => $this->token->expires() ? $this->token->expires_at : null
+    );
+  }
+
+  public function info($raw_info = null)
+  {
+    $raw_info = $raw_info ?: $this->raw_info();
+
+    return array(
+        'nickname'    => $raw_info['username']
+      , 'email'       => $raw_info['email']
+      , 'name'        => $raw_info['name']
+      , 'first_name'  => $raw_info['first_name']
+      , 'last_name'   => $raw_info['last_name']
+      , 'image'       => "http://graph.facebook.com/{$raw_info['id']}/picture?type=square"
+      , 'description' => $raw_info['bio']
+      , 'urls'        => array(
+            'Facebook' => $raw_info['link']
+          , 'Website'  => isset($raw_info['website']) ? $raw_info['website'] : null
+        )
+      , 'location'    => isset($raw_info['location']) ? $raw_info['location']['name'] : null
+    );
+  }
+  
+
+  protected function raw_info()
+  {
+    $response = $this->token->get($this->client->site.'/me', array('parse' => 'json'));
+    return $response->parse();
+  }
 }

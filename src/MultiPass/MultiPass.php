@@ -24,6 +24,7 @@ class MultiPass
   public function callback_phase()
   {
     $this->provider->callback_phase();
+    return $this->provider->auth_hash();
   }
 
   public function request_phase()

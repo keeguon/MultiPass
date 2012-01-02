@@ -10,6 +10,7 @@ class OAuth2
 
   public
       $client = null
+    , $name   = ''
     , $token  = null
   ;
 
@@ -23,8 +24,21 @@ class OAuth2
       , 'authorize_options'    => array()
     ), $opts);
 
+    // Other properties
+    $this->name = get_class();
+
     // Instanciate client
     $this->client = new \OAuth2\Client($client_id, $client_secret, $this->options['client_options']);
+  }
+
+  public function auth_hash()
+  {
+    $raw_info = $this->raw_info();
+    $hash = new \OAuth2\AuthHash($this->name, $raw_info['id']);
+    $hash->info        = $this->info($raw_info);
+    $hahs->credentials = $this->credentials();
+    $hash->raw_info    = $raw_info;
+    return $hash;
   }
 
   public function callback_phase()
