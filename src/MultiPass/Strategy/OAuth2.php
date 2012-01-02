@@ -34,7 +34,7 @@ class OAuth2
   public function auth_hash()
   {
     $raw_info = $this->raw_info();
-    $hash = new \OAuth2\AuthHash($this->name, $raw_info['id']);
+    $hash = new \MultiPass\AuthHash($this->name, $raw_info['id']);
     $hash->info        = $this->info($raw_info);
     $hahs->credentials = $this->credentials();
     $hash->raw_info    = $raw_info;
