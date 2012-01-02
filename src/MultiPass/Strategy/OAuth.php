@@ -75,7 +75,7 @@ class OAuth
       );
 
       // Redirect the user to the Provider Authorize page
-      http_redirect($this->options['client_options']['site'].$this->options['client_options']['authorize_url'].'?oauth_token='.$request_token['oauth_token'];
+      http_redirect($this->options['client_options']['site'].$this->options['client_options']['authorize_url'].'?oauth_token='.$request_token['oauth_token']);
     } catch (\Exception $e) {
       throw $e;
     }
