@@ -42,7 +42,7 @@ class OAuth
     try {
       // Fetch access token
       $this->client->setToken($_GET['oauth_token'], $_SESSION['oauth'][$this->name]['oauth_token_secret']);
-      $access_token = $this->client->getAccessToken($this->options['client_options']['site'].$this->options['client_options']['access_token_url']);
+      $access_token = $this->client->getAccessToken($this->access_token_url());
 
       // Store access token informations
       $_SESSION['oauth'][$this->name] = array(
@@ -61,7 +61,7 @@ class OAuth
   {
     try {
       // Fetch request token
-      $request_token = $this->client->getRequestToken($this->options['client_options']['site'].$this->options['client_options']['request_token_url'], isset($this->options['client_options']['oauth_callback']) ? $this->options['client_options']['oauth_callback'] : 'oob');
+      $request_token = $this->client->getRequestToken($this->request_token_url(), isset($this->options['client_options']['oauth_callback']) ? $this->options['client_options']['oauth_callback'] : 'oob');
 
       // Throw exception if the callback isn't confirmed
       if (!in_array($request_token['oauth_callback_confirmed'], array(true, "true"))) {
@@ -75,9 +75,25 @@ class OAuth
       );
 
       // Redirect the user to the Provider Authorize page
-      http_redirect($this->options['client_options']['site'].$this->options['client_options']['authorize_url'].'?oauth_token='.$request_token['oauth_token']);
+      http_redirect($this->authorize_url().'?oauth_token='.$request_token['oauth_token']);
     } catch (\Exception $e) {
       print_r($e);
     }
+  }
+
+
+  protected access_token_url()
+  {
+    return isset($this->options['client_options']['access_token_url']) ? $this->options['client_options']['access_token_url'] : $this->options['client_options']['site'].$this->options['client_options']['access_token_path'];
+  }
+
+  protected authorize_url()
+  {
+    return isset($this->options['client_options']['authorize_url']) ? $this->options['client_options']['authorize_url']) : $this->options['client_options']['site'].$this->options['client_options']['authorize_path'];
+  }
+
+  protected request_token_url()
+  {
+    return isset($this->options['client_options']['request_token_url']) ? $this->options['client_options']['request_token_url'] : $this->options['client_options']['site'].$this->options['client_options']['request_token_path'];
   }
 }

@@ -13,10 +13,10 @@ class Twitter extends \MultiPass\Strategy\OAuth
     // Default options
     $this->options = array_replace_recursive(array(
         'client_options' => array(
-            'access_token_url'  => '/oauth/access_token'
-          , 'authorize_url'     => '/oauth/authorize'
-          , 'request_token_url' => '/oauth/request_token'
-          , 'site'              => 'https://api.twitter.com'
+            'access_token_path'  => '/oauth/access_token'
+          , 'authorize_path'     => '/oauth/authorize'
+          , 'request_token_path' => '/oauth/request_token'
+          , 'site'               => 'https://api.twitter.com'
         )
     ), $opts);
 
