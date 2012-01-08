@@ -68,6 +68,7 @@ class OAuth2
   
   public function request_phase()
   {
-    http_redirect($this->client->auth_code()->authorize_url($this->options['authorize_options']));
+    header('Location: '.$this->client->auth_code()->authorize_url($this->options['authorize_options']));
+    exit();
   }
 }

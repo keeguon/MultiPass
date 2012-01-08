@@ -75,7 +75,8 @@ class OAuth
       );
 
       // Redirect the user to the Provider Authorize page
-      http_redirect($this->authorize_url().'?oauth_token='.$request_token['oauth_token']);
+      header('Location :'.$this->authorize_url().'?oauth_token='.$request_token['oauth_token']);
+      exit();
     } catch (\Exception $e) {
       print_r($e);
     }
