@@ -56,7 +56,7 @@ class Facebook extends \MultiPass\Strategy\OAuth2
   protected function raw_info()
   {
     try {
-      $response = $this->token->get($this->client->site.'/me', array('parse' => 'json'));
+      $response = $this->token->get('/me', array('parse' => 'json'));
       return $response->parse();
     } catch (\Exception $e) {
       print_r($e);

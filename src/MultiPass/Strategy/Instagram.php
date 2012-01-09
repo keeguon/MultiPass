@@ -52,7 +52,7 @@ class Instagram extends \MultiPass\Strategy\OAuth2
   protected function raw_info()
   {
     try {
-      $response       = $this->token->get($this->client->site.'/v1/users/self', array('parse' => 'json'));
+      $response       = $this->token->get('/v1/users/self', array('parse' => 'json'));
       $parsedResponse = $response->parse();
       return $parsedResponse['data'];
     } catch (\Exception $e) {
