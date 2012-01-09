@@ -14,7 +14,7 @@ class GitHub extends \MultiPass\Strategy\OAuth2
     $this->options = array_replace_recursive(array(
         'client_options'       => array(
             'site'          => 'https://api.github.com'
-            'authorize_url' => 'https://github.com/login/oauth/authorize' 
+          , 'authorize_url' => 'https://github.com/login/oauth/authorize' 
           , 'token_url'     => 'https://github.com/login/oauth/access_token'
         )
       , 'token_params'         => array(
