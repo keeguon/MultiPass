@@ -49,7 +49,7 @@ class Dropbox extends \MultiPass\Strategy\OAuth
       $response = json_decode($this->client->getLastResponse());
 
       // Setting the UID right
-      $response['id'] = $response['uid']
+      $response['id'] = $response['uid'];
       unset($response['uid']);
 
       // return hash
