@@ -4,31 +4,29 @@ namespace MultiPass;
 
 class MultiPass
 {
-  public
-      $provider = null
-  ;
+  public $provider = null;
 
   public function __construct($provider, $opts)
   {
     // Handle
     $provider      = ucfirst(strtolower($provider));
-    $client_id     = $opts['client_id'];
-    $client_secret = $opts['client_secret'];
+    $clientId     = $opts['client_id'];
+    $clientSecret = $opts['client_secret'];
     unset($opts['client_id'], $opts['client_secret']);
 
     // Instanciate provider
     $strategy       = "\MultiPass\Strategy\\$provider";
-    $this->provider = new $strategy($client_id, $client_secret, $opts);
+    $this->provider = new $strategy($clientId, $clientSecret, $opts);
   }
 
-  public function callback_phase()
+  public function callbackPhase()
   {
-    $this->provider->callback_phase();
-    return $this->provider->auth_hash();
+    $this->provider->callbackPhase();
+    return $this->provider->authHash();
   }
 
-  public function request_phase()
+  public function requestPhase()
   {
-    $this->provider->request_phase();
+    $this->provider->requestPhase();
   }
 }
