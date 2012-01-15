@@ -28,7 +28,7 @@ abstract class Strategy
   abstract public function extra();
 
   public function authHash() {
-    $hash              = new \MultiPass\AuthHash(array('provider' => $this->name, 'uid' => $this->uid()));
+    $hash              = new \MultiPass\AuthHash($this->name, $this->uid());
     if (false === $this->options['skip_info']) $hash->info = $this->info();
     $hash->credentials = $this->credentials() || null;
     $hash->extra       = $this->extra() || null;

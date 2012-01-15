@@ -7,7 +7,7 @@ class AuthHash
   protected $credentials = array();
   protected $info        = array();
   protected $provider    = '';
-  protected $raw_info    = array();
+  protected $rawInfo     = array();
   protected $uid         = '';
 
   public function __construct($provider, $uid)
@@ -28,7 +28,7 @@ class AuthHash
       , 'uid'         => $this->uid
       , 'info'        => $this->info
       , 'credentials' => $this->credentials
-      , 'extra'       => $this->raw_info
+      , 'extra'       => $this->rawInfo
     );
   }
 }
