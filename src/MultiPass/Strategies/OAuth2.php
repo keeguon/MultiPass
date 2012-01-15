@@ -83,7 +83,7 @@ class OAuth2 extends \MultiPass\Strategy
         $this->accessToken = $this->accessToken->refresh();
       }
 
-      parent::callbackPhase();
+      return parent::callbackPhase();
     } catch (\ErrorException $e) {
       print_r($e);
     }
