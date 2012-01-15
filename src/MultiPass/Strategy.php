@@ -29,9 +29,11 @@ abstract class Strategy
 
   public function authHash() {
     $hash              = new \MultiPass\AuthHash($this->name, $this->uid());
-    if (false === $this->options['skip_info']) $hash->info = $this->info();
-    $hash->credentials = $this->credentials() || null;
-    $hash->extra       = $this->extra() || null;
+    if (false === $this->options['skip_info']) {
+      $hash->info = $this->info();
+    }
+    $hash->credentials = $this->credentials() ?: null;
+    $hash->extra       = $this->extra() ?: null;
     
     return $hash;
   }

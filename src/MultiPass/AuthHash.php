@@ -4,11 +4,11 @@ namespace MultiPass;
 
 class AuthHash
 {
-  protected $credentials = array();
-  protected $info        = array();
-  protected $provider    = '';
-  protected $rawInfo     = array();
-  protected $uid         = '';
+  public $credentials = array();
+  public $info        = array();
+  public $provider    = '';
+  public $rawInfo     = array();
+  public $uid         = '';
 
   public function __construct($provider, $uid)
   {
