@@ -37,6 +37,10 @@ class OAuth2 extends \MultiPass\Strategy
     return $this->getFullHost().$this->getCallbackPath();
   }
 
+  abstract public function uid();
+
+  abstract public function info();
+
   public function credentials()
   {
     $hash = array('token' => $this->accessToken->getToken());
@@ -49,6 +53,8 @@ class OAuth2 extends \MultiPass\Strategy
     $hash['expires'] = $this->accessToken->expires();
     return $hash;
   }
+
+  abstract public function extra();
 
   public function requestPhase()
   {
