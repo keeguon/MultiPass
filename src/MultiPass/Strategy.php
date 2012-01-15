@@ -47,12 +47,12 @@ abstract class Strategy
 
   public function getRequestPath()
   {
-    return $this->options['request_path'] || $this->pathPrefix().$this->name;
+    return $this->options['request_path'] || $this->getPathPrefix().$this->name;
   }
 
   public function getCallbackPath()
   {
-    return $this->options['callback_path'] || $this->pathPrefix().$this->name.'/callback';
+    return $this->options['callback_path'] || $this->getPathPrefix().$this->name.'/callback';
   }
 
   public function getCurrentPath()
