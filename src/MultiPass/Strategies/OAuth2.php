@@ -53,12 +53,7 @@ class OAuth2 extends \MultiPass\Strategy
     return $hash;
   }
 
-  public function extra()
-  {
-    $rawInfo = $rawInfo ?: $this->rawInfo();
-    
-    return array('raw_info' => $rawInfo);
-  }
+  public function extra() {}
 
   public function requestPhase()
   {

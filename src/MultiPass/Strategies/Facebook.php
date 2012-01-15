@@ -54,6 +54,13 @@ class Facebook extends \MultiPass\Strategies\OAuth2
     );
   }
   
+  public function extra($rawInfo = null)
+  {
+    $rawInfo = $rawInfo ?: $this->rawInfo();
+    
+    return array('raw_info' => $rawInfo);
+  }
+
   public function authorizeParams()
   {
     $params = parent::authorizeParams();

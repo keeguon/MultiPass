@@ -5,9 +5,9 @@ namespace MultiPass;
 class AuthHash
 {
   public $credentials = array();
+  public $extra       = array();
   public $info        = array();
   public $provider    = '';
-  public $rawInfo     = array();
   public $uid         = '';
 
   public function __construct($provider, $uid)
@@ -28,7 +28,7 @@ class AuthHash
       , 'uid'         => $this->uid
       , 'info'        => $this->info
       , 'credentials' => $this->credentials
-      , 'extra'       => $this->rawInfo
+      , 'extra'       => $this->extra
     );
   }
 }
