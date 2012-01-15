@@ -27,38 +27,38 @@ class Facebook extends \MultiPass\Strategies\OAuth2
     parent::__construct($this->options);
   }
 
-  public function uid($raw_info = null)
+  public function uid($rawInfo = null)
   {
-    $raw_info = $raw_info ?: $this->rawInfo();
+    $rawInfo = $rawInfo ?: $this->rawInfo();
  
-    return $raw_info['id'];
+    return $rawInfo['id'];
   }
 
-  public function info($raw_info = null)
+  public function info($rawInfo = null)
   {
-    $raw_info = $raw_info ?: $this->rawInfo();
+    $rawInfo = $rawInfo ?: $this->rawInfo();
 
     return array(
-        'nickname'    => $raw_info['username']
-      , 'email'       => $raw_info['email']
-      , 'name'        => $raw_info['name']
-      , 'first_name'  => $raw_info['first_name']
-      , 'last_name'   => $raw_info['last_name']
-      , 'image'       => "http://graph.facebook.com/{$raw_info['id']}/picture?type=square"
-      , 'description' => $raw_info['bio']
+        'nickname'    => $rawInfo['username']
+      , 'email'       => $rawInfo['email']
+      , 'name'        => $rawInfo['name']
+      , 'first_name'  => $rawInfo['first_name']
+      , 'last_name'   => $rawInfo['last_name']
+      , 'image'       => "http://graph.facebook.com/{$rawInfo['id']}/picture?type=square"
+      , 'description' => $rawInfo['bio']
       , 'urls'        => array(
-            'Facebook' => $raw_info['link']
-          , 'Website'  => isset($raw_info['website']) ? $raw_info['website'] : null
+            'Facebook' => $rawInfo['link']
+          , 'Website'  => isset($rawInfo['website']) ? $rawInfo['website'] : null
         )
-      , 'location'    => isset($raw_info['location']) ? $raw_info['location']['name'] : null
+      , 'location'    => isset($rawInfo['location']) ? $rawInfo['location']['name'] : null
     );
   }
   
-  public function extra($raw_info = null)
+  public function extra($rawInfo = null)
   {
-    $raw_info = $raw_info ?: $this->rawInfo();
+    $rawInfo = $rawInfo ?: $this->rawInfo();
     
-    return array('raw_info' => $raw_info);
+    return array('rawInfo' => $rawInfo);
   }
 
   public function authorizeParams()
@@ -73,7 +73,7 @@ class Facebook extends \MultiPass\Strategies\OAuth2
   protected function rawInfo()
   {
     try {
-      $response = $this->token->get('/me', array('parse' => 'json'));
+      $response = $this->accessToken->get('/me', array('parse' => 'json'));
       return $response->parse();
     } catch (\Exception $e) {
       print_r($e);
