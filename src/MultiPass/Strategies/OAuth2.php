@@ -29,7 +29,7 @@ class OAuth2 extends \MultiPass\Strategy
 
   public function getClient()
   {
-    return ($this->client) ? $this->client : new \OAuth2\Client($client_id, $client_secret, $this->options['client_options']);
+    return ($this->client) ? $this->client : new \OAuth2\Client($this->options['client_id'], $this->options['client_secret'], $this->options['client_options']);
   }
 
   public function getCallbackUrl()
@@ -58,7 +58,7 @@ class OAuth2 extends \MultiPass\Strategy
 
   public function requestPhase()
   {
-    header('Location: '.$this->client->authCode()->authorizeUrl(array_merge(array('redirect_uri' => $this->callbackUrl()), $this->authorizeParams())));
+    header('Location: '.$this->getClient()->authCode()->authorizeUrl(array_merge(array('redirect_uri' => $this->callbackUrl()), $this->authorizeParams())));
     exit();
   }
 
