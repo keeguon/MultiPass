@@ -42,17 +42,17 @@ abstract class Strategy
 
   public function getPathPrefix()
   {
-    return $this->options['path_prefix'] || '/auth';
+    return $this->options['path_prefix'] ?: '/auth';
   }
 
   public function getRequestPath()
   {
-    return $this->options['request_path'] || $this->getPathPrefix().$this->name;
+    return $this->options['request_path'] ?: $this->getPathPrefix().$this->name;
   }
 
   public function getCallbackPath()
   {
-    return $this->options['callback_path'] || $this->getPathPrefix().$this->name.'/callback';
+    return $this->options['callback_path'] ?: $this->getPathPrefix().$this->name.'/callback';
   }
 
   public function getCurrentPath()
@@ -71,7 +71,7 @@ abstract class Strategy
 
   public function getFullHost()
   {
-    return $_SERVER['HTTP_HOST'];
+    return $_SERVER['HTTPS'] === 'off' ? 'http://'.$_SERVER['HTTP_HOST'] : 'https://'.$_SERVER['HTTP_HOST'];
   }
 
   public function getCallbackUrl()
