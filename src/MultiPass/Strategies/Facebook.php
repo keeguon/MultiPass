@@ -64,7 +64,7 @@ class Facebook extends \MultiPass\Strategies\OAuth2
   public function authorizeParams()
   {
     $params = parent::authorizeParams();
-    $params['scope'] = $params['scope'] ?: self::DEFAULT_SCOPE;
+    $params['scope'] = array_key_exists('scope', $params) ? $params['scope'] : self::DEFAULT_SCOPE;
 
     return $params;
   }

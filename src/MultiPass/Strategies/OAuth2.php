@@ -8,7 +8,6 @@ class OAuth2 extends \MultiPass\Strategy
 
   protected $client      = null;
   protected $name        = 'oauth2';
-  protected $scope       = array();
   protected $accessToken = null;
 
   public function __construct($opts)
@@ -19,7 +18,7 @@ class OAuth2 extends \MultiPass\Strategy
       , 'client_secret'     => array()
       , 'client_options'    => array()
       , 'authorize_params'  => array()
-      , 'authorize_options' => array('scope' => $this->scope)
+      , 'authorize_options' => array()
       , 'token_params'      => array()
       , 'token_options'     => array()
     ), $opts);
@@ -94,6 +93,6 @@ class OAuth2 extends \MultiPass\Strategy
   protected function buildAccessToken()
   {
     $verifier = $_GET['code'];
-    return $this->getClient()->authCode()->getToken($verifier, array_merge(array('redirect_uri' => $this->getCallbackUrl()), $this->options['token_params']));
+    return $this->getClient()->authCode()->getToken($verifier, array_merge(array('redirect_uri' => $this->getCallbackUrl()), $this->options['token_params']), $this->options['token_options']);
   }
 }
