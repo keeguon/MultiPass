@@ -20,7 +20,7 @@ class Configuration
     return self::$instance;
   }
 
-  public function registerConfig($config, $opts)
+  public function registerConfig($provider, $opts)
   {
     $this->config[$provider] = $opts;
   }
@@ -34,14 +34,14 @@ class Configuration
 
   public function register()
   {
-    foreach ($config as $provider => $opts) {
+    foreach ($this->config as $provider => $opts) {
       $strategy = "\MultiPass\Strategies\\$provider";
-      $strategies[$provider] = new $strategy($opts);
+      $this->strategies[$provider] = new $strategy($opts);
     }
   }
 
   public function getStrategy($provider)
   {
-    return $strategies[$provider];
+    return $this->strategies[$provider];
   }
 }
