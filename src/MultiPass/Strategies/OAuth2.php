@@ -69,7 +69,7 @@ class OAuth2 extends \MultiPass\Strategy
 
   public function tokenParams()
   {
-    return array_merge($this->options['token_params'], $this->options['token_option']);
+    return array_merge($this->options['token_params'], $this->options['token_options']);
   }
 
   public function callbackPhase()
