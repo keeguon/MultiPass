@@ -6,7 +6,7 @@ class Facebook extends \MultiPass\Strategies\OAuth2
 {
   const DEFAULT_SCOPE = 'email,offline_access';
 
-  public $name = 'Facebook';
+  public $name = 'facebook';
 
   public function __construct($opts)
   {

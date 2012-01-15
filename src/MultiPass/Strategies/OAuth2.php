@@ -7,7 +7,7 @@ class OAuth2 extends \MultiPass\Strategy
   public $options = array();
 
   protected $client      = null;
-  protected $name        = 'OAuth2';
+  protected $name        = 'oauth2';
   protected $scope       = array();
   protected $accessToken = null;
 
