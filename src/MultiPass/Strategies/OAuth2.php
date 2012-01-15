@@ -94,6 +94,6 @@ class OAuth2 extends \MultiPass\Strategy
   protected function buildAccessToken()
   {
     $verifier = $_GET['code'];
-    return $this->client->authCode()->getToken($verifier, array_merge(array('redirect_uri' => $this->callbackUrl()), $this->options['token_params']));
+    return $this->getClient()->authCode()->getToken($verifier, array_merge(array('redirect_uri' => $this->callbackUrl()), $this->options['token_params']));
   }
 }
