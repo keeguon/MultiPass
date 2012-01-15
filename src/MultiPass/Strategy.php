@@ -17,15 +17,15 @@ abstract class Strategy
     ), $opts);
   }
 
-  abstract public function requestPhase() {}
+  abstract public function requestPhase();
 
-  abstract public function uid() {}
+  abstract public function uid();
 
-  abstract public function info() {}
+  abstract public function info();
 
-  abstract public function credentials() {}
+  abstract public function credentials();
 
-  abstract public function extra() {}
+  abstract public function extra();
 
   public function authHash() {
     $hash              = new \MultiPass\AuthHash(array('provider' => $this->name, 'uid' => $this->uid()));
