@@ -58,7 +58,7 @@ class OAuth2 extends \MultiPass\Strategy
 
   public function requestPhase()
   {
-    header('Location: '.$this->getClient()->authCode()->authorizeUrl(array_merge(array('redirect_uri' => $this->callbackUrl()), $this->authorizeParams())));
+    header('Location: '.$this->getClient()->authCode()->authorizeUrl(array_merge(array('redirect_uri' => $this->getCallbackUrl()), $this->authorizeParams())));
     exit();
   }
 
