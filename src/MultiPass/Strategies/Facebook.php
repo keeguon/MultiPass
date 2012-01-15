@@ -29,14 +29,14 @@ class Facebook extends \MultiPass\Strategies\OAuth2
 
   public function uid($raw_info = null)
   {
-    $raw_info = $raw_info || $this->raw_info();
+    $raw_info = $raw_info ?: $this->rawInfo();
  
     return $raw_info['id'];
   }
 
   public function info($raw_info = null)
   {
-    $raw_info = $raw_info || $this->raw_info();
+    $raw_info = $raw_info ?: $this->rawInfo();
 
     return array(
         'nickname'    => $raw_info['username']
@@ -56,7 +56,7 @@ class Facebook extends \MultiPass\Strategies\OAuth2
   
   public function extra($raw_info = null)
   {
-    $raw_info = $raw_info || $this->raw_info();
+    $raw_info = $raw_info ?: $this->raw_info();
     
     return array('raw_info' => $raw_info);
   }
@@ -64,7 +64,7 @@ class Facebook extends \MultiPass\Strategies\OAuth2
   public function authorizeParams()
   {
     $params = parent::authorizeParams();
-    $params['scope'] = $params['scope'] || self::DEFAULT_SCOPE;
+    $params['scope'] = $params['scope'] ?: self::DEFAULT_SCOPE;
 
     return $params;
   }
