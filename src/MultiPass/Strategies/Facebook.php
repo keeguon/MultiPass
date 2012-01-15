@@ -56,7 +56,7 @@ class Facebook extends \MultiPass\Strategies\OAuth2
   
   public function extra($raw_info = null)
   {
-    $raw_info = $raw_info ?: $this->raw_info();
+    $raw_info = $raw_info ?: $this->rawInfo();
     
     return array('raw_info' => $raw_info);
   }
@@ -70,7 +70,7 @@ class Facebook extends \MultiPass\Strategies\OAuth2
   }
 
 
-  protected function raw_info()
+  protected function rawInfo()
   {
     try {
       $response = $this->token->get('/me', array('parse' => 'json'));
