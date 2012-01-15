@@ -42,17 +42,17 @@ abstract class Strategy
 
   public function getPathPrefix()
   {
-    return $this->options['path_prefix'] ?: '/auth';
+    return array_key_exists('path_prefix', $this->options) ? $this->options['path_prefix'] : '/auth';
   }
 
   public function getRequestPath()
   {
-    return $this->options['request_path'] ?: $this->getPathPrefix().'/'.$this->name;
+    return array_key_exists('request_path', $this->options) ? $this->options['request_path'] : $this->getPathPrefix().'/'.$this->name;
   }
 
   public function getCallbackPath()
   {
-    return $this->options['callback_path'] ?: $this->getPathPrefix().'/'.$this->name.'/callback';
+    return array_key_exists('callback_path', $this->options) ? $this->options['callback_path'] : $this->getPathPrefix().'/'.$this->name.'/callback';
   }
 
   public function getCurrentPath()
