@@ -37,9 +37,9 @@ class OAuth2 extends \MultiPass\Strategy
     return $this->getFullHost().$this->getCallbackPath();
   }
 
-  abstract public function uid();
+  public function uid() {}
 
-  abstract public function info();
+  public function info() {}
 
   public function credentials()
   {
@@ -54,7 +54,7 @@ class OAuth2 extends \MultiPass\Strategy
     return $hash;
   }
 
-  abstract public function extra();
+  public function extra() {}
 
   public function requestPhase()
   {
