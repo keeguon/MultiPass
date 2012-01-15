@@ -1,40 +1,42 @@
 <?php
 
-namespace MultiPass\Strategy;
+namespace MultiPass\Strategies;
 
-class Facebook extends \MultiPass\Strategy\OAuth2
+class Facebook extends \MultiPass\Strategies\OAuth2
 {
   const DEFAULT_SCOPE = 'email,offline_access';
 
-  public
-      $name = 'Facebook'
-  ;
+  public $name = 'Facebook';
 
-  public function __construct($client_id, $client_secret, $opts)
+  public function __construct($opts)
   {
     $this->options = array_replace_recursive(array(
-        'client_options'       => array(
+        'client_options' => array(
             'site'      => 'https://graph.facebook.com'
           , 'token_url' => '/oauth/access_token'
         )
-      , 'token_params'         => array(
+      , 'token_params' => array(
             'parse' => 'query'
         )
-      , 'access_token_options' => array(
+      , 'token_options' => array(
             'header_format' => 'OAuth %s'
           , 'param_name'    => 'access_token'
         )
-      , 'authorize_options'    => array(
-            'scope' => self::DEFAULT_SCOPE
-        )
     ), $opts);
 
-    parent::__construct($client_id, $client_secret, $this->options);
+    parent::__construct($this->options);
+  }
+
+  public function uid($raw_info = null)
+  {
+    $raw_info = $raw_info || $this->raw_info();
+ 
+    return $raw_info['id'];
   }
 
   public function info($raw_info = null)
   {
-    $raw_info = $raw_info ?: $this->raw_info();
+    $raw_info = $raw_info || $this->raw_info();
 
     return array(
         'nickname'    => $raw_info['username']
@@ -52,6 +54,13 @@ class Facebook extends \MultiPass\Strategy\OAuth2
     );
   }
   
+  public function extra($raw_info = null)
+  {
+    $raw_info = $raw_info || $this->raw_info();
+    
+    return array('raw_info' => $raw_info);
+  }
+
 
   protected function raw_info()
   {

@@ -1,8 +1,8 @@
 <?php
 
-namespace MultiPass\Strategy;
+namespace MultiPass\Strategies;
 
-class Dropbox extends \MultiPass\Strategy\OAuth
+class Dropbox extends \MultiPass\Strategies\OAuth
 {
   public
       $name = 'Dropbox'

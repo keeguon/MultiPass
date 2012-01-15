@@ -1,8 +1,8 @@
 <?php
 
-namespace MultiPass\Strategy;
+namespace MultiPass\Strategies;
 
-class Foursquare extends \MultiPass\Strategy\OAuth2
+class Foursquare extends \MultiPass\Strategies\OAuth2
 {
   public
       $name = 'Foursquare'

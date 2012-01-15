@@ -1,6 +1,6 @@
 <?php
 
-namespace MultiPass\Strategy;
+namespace MultiPass\Strategies;
 
 class OAuth
 {

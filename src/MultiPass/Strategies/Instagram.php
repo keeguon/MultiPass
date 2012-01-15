@@ -1,8 +1,8 @@
 <?php
 
-namespace MultiPass\Strategy;
+namespace MultiPass\Strategies;
 
-class Instagram extends \MultiPass\Strategy\OAuth2
+class Instagram extends \MultiPass\Strategies\OAuth2
 {
   const DEFAULT_SCOPE = 'basic';
 

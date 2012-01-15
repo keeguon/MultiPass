@@ -4,21 +4,21 @@ namespace MultiPass;
 
 class AuthHash
 {
-  protected
-      $provider = ''
-    , $uid      = ''
-  ;
-
-  public
-      $credentials = array()
-    , $info        = array()
-    , $raw_info    = array()
-  ;
+  protected $credentials = array();
+  protected $info        = array();
+  protected $provider    = '';
+  protected $raw_info    = array();
+  protected $uid         = '';
 
   public function __construct($provider, $uid)
   {
     $this->provider = strtolower($provider);
     $this->uid      = $uid;
+  }
+
+  public function isValid()
+  {
+    return ($this->uid && $this->provider && $this->info && array_key_exists('name', $this->info));
   }
 
   public function toArray()
@@ -28,9 +28,7 @@ class AuthHash
       , 'uid'         => $this->uid
       , 'info'        => $this->info
       , 'credentials' => $this->credentials
-      , 'extra'       => array(
-            'raw_info' => $this->raw_info
-        )
+      , 'extra'       => $this->raw_info
     );
   }
 }

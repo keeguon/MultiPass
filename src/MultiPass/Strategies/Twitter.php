@@ -1,8 +1,8 @@
 <?php
 
-namespace MultiPass\Strategy;
+namespace MultiPass\Strategies;
 
-class Twitter extends \MultiPass\Strategy\OAuth
+class Twitter extends \MultiPass\Strategies\OAuth
 {
   public
       $name = 'Twitter'

@@ -1,8 +1,8 @@
 <?php
 
-namespace MultiPass\Strategy;
+namespace MultiPass\Strategies;
 
-class GitHub extends \MultiPass\Strategy\OAuth2
+class GitHub extends \MultiPass\Strategies\OAuth2
 {
   public
       $name = 'GitHub'

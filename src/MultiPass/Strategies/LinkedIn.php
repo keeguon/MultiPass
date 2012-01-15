@@ -1,8 +1,8 @@
 <?php
 
-namespace MultiPass\Strategy;
+namespace MultiPass\Strategies;
 
-class LinkedIn extends \MultiPass\Strategy\OAuth
+class LinkedIn extends \MultiPass\Strategies\OAuth
 {
   public
       $name = 'LinkedIn'
