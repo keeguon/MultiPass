@@ -10,13 +10,13 @@ class Foursquare extends \MultiPass\Strategies\OAuth2
   {
     // Default options
     $this->options = array_replace_recursive(array(
-        'client_options'       => array(
+        'client_options' => array(
             'site'          => 'https://foursquare.com'
           , 'token_url'     => '/oauth2/access_token'
           , 'authorize_url' => '/oauth2/authenticate'
           , 'token_method'  => 'GET'
         )
-      , 'token_params'         => array(
+      , 'token_params' => array(
             'parse' => 'json'
         )
       , 'token_options' => array(
