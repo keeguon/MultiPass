@@ -4,11 +4,9 @@ namespace MultiPass\Strategies;
 
 class Foursquare extends \MultiPass\Strategies\OAuth2
 {
-  public
-      $name = 'Foursquare'
-  ;
+  public $name = 'foursquare';
 
-  public function __construct($client_id, $client_secret, $opts)
+  public function __construct($opts)
   {
     // Default options
     $this->options = array_replace_recursive(array(
@@ -21,32 +19,37 @@ class Foursquare extends \MultiPass\Strategies\OAuth2
       , 'token_params'         => array(
             'parse' => 'json'
         )
-      , 'access_token_options' => array(
+      , 'token_options' => array(
             'mode'       => 'query'
           , 'param_name' => 'oauth_token'
         )
-      , 'authorize_options'    => array()
     ), $opts);
 
-    parent::__construct($client_id, $client_secret, $this->options);
+    parent::__construct($this->options);
   }
 
-  public function info($raw_info = null)
+  public function uid($rawInfo = null)
   {
-    $raw_info = $raw_info ?: $this->raw_info();
+    $rawInfo = $rawInfo ?: $this->rawInfo();
+ 
+    return $rawInfo['id'];
+  }
+
+  public function info($rawInfo = null)
+  {
+    $rawInfo = $rawInfo ?: $this->rawInfo();
 
     return array(
-        'first_name' => $raw_info['firstName']
-      , 'last_name'  => $raw_info['lastName']
-      , 'image'      => $raw_info['photo']
+        'first_name' => $rawInfo['firstName']
+      , 'last_name'  => $rawInfo['lastName']
+      , 'image'      => $rawInfo['photo']
     );
   }
 
-
-  protected function raw_info()
+  protected function rawInfo()
   {
     try {
-      $response       = $this->token->get('https://api.foursquare.com/v2/users/self', array('parse' => 'json'));
+      $response       = $this->accessToken->get('https://api.foursquare.com/v2/users/self', array('parse' => 'json'));
       $parsedResponse = $response->parse();
       return $parsedResponse['response']['user'];
     } catch (\Exception $e) {
