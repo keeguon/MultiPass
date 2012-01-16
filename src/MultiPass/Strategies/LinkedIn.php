@@ -4,9 +4,7 @@ namespace MultiPass\Strategies;
 
 class LinkedIn extends \MultiPass\Strategies\OAuth
 {
-  public
-      $name = 'LinkedIn'
-  ;
+  protected $name = 'LinkedIn';
 
   public function __construct($client_id, $client_secret, $opts)
   {

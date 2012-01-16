@@ -4,7 +4,7 @@ namespace MultiPass\Strategies;
 
 class Foursquare extends \MultiPass\Strategies\OAuth2
 {
-  public $name = 'foursquare';
+  protected $name = 'foursquare';
 
   public function __construct($opts)
   {

@@ -12,6 +12,8 @@ class OAuth2 extends \MultiPass\Strategy
 
   public function __construct($opts)
   {
+    parent::__construct($opts);
+    
     // Default options
     $this->options = array_replace_recursive(array(
         'client_id'         => null
@@ -21,14 +23,15 @@ class OAuth2 extends \MultiPass\Strategy
       , 'authorize_options' => array()
       , 'token_params'      => array()
       , 'token_options'     => array()
-    ), $opts);
+    ), $this->options);
 
-    parent::__construct($this->options);
+    // Instanciate client
+    $this->client = new \OAuth2\Client($this->options['client_id'], $this->options['client_secret'], $this->options['client_options']);
   }
 
   public function getClient()
   {
-    return $this->client ? $this->client : new \OAuth2\Client($this->options['client_id'], $this->options['client_secret'], $this->options['client_options']);
+    return $this->client;
   }
 
   public function getCallbackUrl()
@@ -62,8 +65,8 @@ class OAuth2 extends \MultiPass\Strategy
 
   public function requestPhase()
   {
-    header('Location: '.$this->getClient()->authCode()->authorizeUrl(array_merge(array('redirect_uri' => $this->getCallbackUrl()), $this->authorizeParams())));
-    exit();
+    header('Location: '.$this->client->authCode()->authorizeUrl(array_merge(array('redirect_uri' => $this->getCallbackUrl()), $this->authorizeParams())));
+    exit;
   }
 
   public function authorizeParams()
@@ -87,7 +90,7 @@ class OAuth2 extends \MultiPass\Strategy
       if ($this->accessToken->isExpired()) {
         $this->accessToken = $this->accessToken->refresh();
       }
-
+      
       return parent::callbackPhase();
     } catch (\ErrorException $e) {
       print_r($e);
@@ -97,6 +100,6 @@ class OAuth2 extends \MultiPass\Strategy
   protected function buildAccessToken()
   {
     $verifier = $_GET['code'];
-    return $this->getClient()->authCode()->getToken($verifier, array_merge(array('redirect_uri' => $this->getCallbackUrl()), $this->options['token_params']), $this->options['token_options']);
+    return $this->client->authCode()->getToken($verifier, array_merge(array('redirect_uri' => $this->getCallbackUrl()), $this->options['token_params']), $this->options['token_options']);
   }
 }

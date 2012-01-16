@@ -6,7 +6,7 @@ class Instagram extends \MultiPass\Strategies\OAuth2
 {
   const DEFAULT_SCOPE = 'basic';
 
-  public $name = 'instagram';
+  protected $name = 'instagram';
 
   public function __construct($opts)
   {

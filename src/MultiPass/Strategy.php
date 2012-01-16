@@ -67,8 +67,8 @@ abstract class Strategy
   public function getQueryString()
   {
     $parsedUrl = parse_url($_SERVER['REQUEST_URI']);
-    
-    return $parsedUrl['query'];
+
+    return isset($parsedUrl['query']) ? $parsedUrl['query'] : null;
   }
 
   public function getFullHost()
@@ -78,7 +78,7 @@ abstract class Strategy
 
   public function getCallbackUrl()
   {
-    return $this->getFullHost().$this->getCallbackPath().'?'.$this->getQueryString();
+    return $this->getQueryString() ? $this->getFullHost().$this->getCallbackPath().'?'.$this->getQueryString() : $this->getFullHost().$this->getCallbackPath();
   }
 
   public function getName()

@@ -4,7 +4,7 @@ namespace MultiPass\Strategies;
 
 class GitHub extends \MultiPass\Strategies\OAuth2
 {
-  public $name = 'github';
+  protected $name = 'github';
 
   public function __construct($opts)
   {
