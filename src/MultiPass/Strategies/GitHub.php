@@ -4,51 +4,54 @@ namespace MultiPass\Strategies;
 
 class GitHub extends \MultiPass\Strategies\OAuth2
 {
-  public
-      $name = 'GitHub'
-  ;
+  public $name = 'github';
 
-  public function __construct($client_id, $client_secret, $opts)
+  public function __construct($opts)
   {
     // Default options
     $this->options = array_replace_recursive(array(
-        'client_options'       => array(
+        'client_options' => array(
             'site'          => 'https://api.github.com'
           , 'authorize_url' => 'https://github.com/login/oauth/authorize' 
           , 'token_url'     => 'https://github.com/login/oauth/access_token'
         )
-      , 'token_params'         => array(
+      , 'token_params' => array(
             'parse' => 'query'
         )
-      , 'access_token_params'  => array(
+      , 'token_options' => array(
             'mode'       => 'query'
           , 'param_name' => 'access_token'
         )
-      , 'authorize_options'    => array()
     ), $opts);
 
-    parent::__construct($client_id, $client_secret, $this->options);
+    parent::__construct($this->options);
+  }
+  
+  public function uid($rawInfo = null)
+  {
+    $rawInfo = $rawInfo ?: $this->rawInfo();
+ 
+    return $rawInfo['id'];
   }
 
-  public function info($raw_info = null)
+  public function info($rawInfo = null)
   {
-    $raw_info = $raw_info ?: $this->raw_info();
+    $rawInfo = $rawInfo ?: $this->rawInfo();
 
     return array(
-        'nickname'    => $raw_info['login']
-      , 'email'       => $raw_info['email']
-      , 'name'        => $raw_info['name']
-      , 'image'       => $raw_info['avatar_url']
-      , 'description' => $raw_info['bio']
+        'nickname'    => $rawInfo['login']
+      , 'email'       => $rawInfo['email']
+      , 'name'        => $rawInfo['name']
+      , 'image'       => $rawInfo['avatar_url']
+      , 'description' => $rawInfo['bio']
       , 'urls'        => array(
-            'GitHub' => $raw_info['html_url']
-          , 'Blog'   => $raw_info['blog']
+            'GitHub' => $rawInfo['html_url']
+          , 'Blog'   => $rawInfo['blog']
         )
     );
   }
 
-  
-  protected function raw_info()
+  protected function rawInfo()
   {
     try {
       $response = $this->token->get('/user', array('parse' => 'json'));

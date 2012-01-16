@@ -68,7 +68,6 @@ class Facebook extends \MultiPass\Strategies\OAuth2
     return $params;
   }
 
-
   protected function rawInfo()
   {
     try {

@@ -94,7 +94,6 @@ class OAuth2 extends \MultiPass\Strategy
     }
   }
 
-
   protected function buildAccessToken()
   {
     $verifier = $_GET['code'];
