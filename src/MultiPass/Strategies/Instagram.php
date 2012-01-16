@@ -8,7 +8,7 @@ class Instagram extends \MultiPass\Strategies\OAuth2
 
   public $name = 'Instagram';
 
-  public function __construct($client_id, $client_secret, $opts)
+  public function __construct($opts)
   {
     // Default options
     $this->options = array_replace_recursive(array(
@@ -25,7 +25,7 @@ class Instagram extends \MultiPass\Strategies\OAuth2
         )
     ), $opts);
 
-    parent::__construct($client_id, $client_secret, $this->options);
+    parent::__construct($this->options);
   }
 
   public function info($rawInfo = null)
