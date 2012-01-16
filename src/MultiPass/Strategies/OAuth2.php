@@ -28,7 +28,7 @@ class OAuth2 extends \MultiPass\Strategy
 
   public function getClient()
   {
-    return ($this->client) ? $this->client : new \OAuth2\Client($this->options['client_id'], $this->options['client_secret'], $this->options['client_options']);
+    return $this->client ? $this->client : new \OAuth2\Client($this->options['client_id'], $this->options['client_secret'], $this->options['client_options']);
   }
 
   public function getCallbackUrl()
