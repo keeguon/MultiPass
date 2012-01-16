@@ -4,10 +4,12 @@ namespace MultiPass\Strategies;
 
 class LinkedIn extends \MultiPass\Strategies\OAuth
 {
-  protected $name = 'LinkedIn';
+  protected $name = 'linkedin';
 
-  public function __construct($client_id, $client_secret, $opts)
+  public function __construct($opts)
   {
+    parent::__construct($opts);
+
     // Default options
     $this->options = array_replace_recursive(array(
         'client_options' => array(
@@ -16,39 +18,34 @@ class LinkedIn extends \MultiPass\Strategies\OAuth
           , 'request_token_path' => '/uas/oauth/requestToken'
           , 'site'               => 'https://api.linkedin.com'
         )
-      , 'fields'         => array('id', 'first-name', 'last-name', 'headline', 'industry', 'picture-url', 'public-profile-url')
-    ), $opts);
+      , 'fields' => array('id', 'first-name', 'last-name', 'headline', 'industry', 'picture-url', 'public-profile-url')
+    ), $this->options);
+  }
+  
+  public function uid($rawInfo = null) {
+    $rawInfo = $rawInfo ?: $this->rawInfo();
 
-    parent::__construct($client_id, $client_secret, $this->options);
+    return $rawInfo['id'];
   }
 
-  public function credentials()
+  public function info($rawInfo = null)
   {
-    return array(
-        'token'  => $_SESSION['oauth'][$this->name]['oauth_token']
-      , 'secret' => $_SESSION['oauth'][$this->name]['oauth_token_secret']
-    );
-  }
-
-  public function info($raw_info = null)
-  {
-    $raw_info = $raw_info ?: $this->raw_info();
+    $rawInfo = $rawInfo ?: $this->rawInfo();
 
     return array(
-        'first_name' => $raw_info['firstName']
-      , 'last_name'  => $raw_info['lastName']
-      , 'name'       => "{$raw_info['firstName']} {$raw_info['lastName']}"
-      , 'headline'   => $raw_info['headline']
-      , 'image'      => $raw_info['pictureUrl']
-      , 'industry'   => $raw_info['industry']
+        'first_name' => $rawInfo['firstName']
+      , 'last_name'  => $rawInfo['lastName']
+      , 'name'       => "{$rawInfo['firstName']} {$rawInfo['lastName']}"
+      , 'headline'   => $rawInfo['headline']
+      , 'image'      => $rawInfo['pictureUrl']
+      , 'industry'   => $rawInfo['industry']
       , 'urls'       => array(
-            'public_profile' => $raw_info['publicProfileUrl']
+            'public_profile' => $rawInfo['publicProfileUrl']
         )
     );
   }
 
-
-  protected function raw_info()
+  protected function rawInfo()
   {
     try {
       $this->client->fetch($this->options['client_options']['site'].'/v1/people/~:'.implode(',', $this->options['fields']).'?format=json')

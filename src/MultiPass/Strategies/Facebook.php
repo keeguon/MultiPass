@@ -10,6 +10,9 @@ class Facebook extends \MultiPass\Strategies\OAuth2
 
   public function __construct($opts)
   {
+    parent::__construct($opts);
+    
+    // Default options
     $this->options = array_replace_recursive(array(
         'client_options' => array(
             'site'      => 'https://graph.facebook.com'
@@ -22,9 +25,7 @@ class Facebook extends \MultiPass\Strategies\OAuth2
             'header_format' => 'OAuth %s'
           , 'param_name'    => 'access_token'
         )
-    ), $opts);
-
-    parent::__construct($this->options);
+    ), $this->options);
   }
 
   public function uid($rawInfo = null)

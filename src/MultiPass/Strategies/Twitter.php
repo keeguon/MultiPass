@@ -8,6 +8,8 @@ class Twitter extends \MultiPass\Strategies\OAuth
 
   public function __construct($opts)
   {
+    parent::__construct($opts);
+    
     // Default options
     $this->options = array_replace_recursive(array(
         'client_options' => array(
@@ -16,9 +18,7 @@ class Twitter extends \MultiPass\Strategies\OAuth
           , 'request_token_path' => '/oauth/request_token'
           , 'site'               => 'https://api.twitter.com'
         )
-    ), $opts);
-
-    parent::__construct($this->options);
+    ), $this->options);
   }
 
   public function uid($rawInfo = null) {

@@ -8,6 +8,8 @@ class Foursquare extends \MultiPass\Strategies\OAuth2
 
   public function __construct($opts)
   {
+    parent::__construct($this->options);
+    
     // Default options
     $this->options = array_replace_recursive(array(
         'client_options' => array(
@@ -23,9 +25,7 @@ class Foursquare extends \MultiPass\Strategies\OAuth2
             'mode'       => 'query'
           , 'param_name' => 'oauth_token'
         )
-    ), $opts);
-
-    parent::__construct($this->options);
+    ), $this->options);
   }
 
   public function uid($rawInfo = null)

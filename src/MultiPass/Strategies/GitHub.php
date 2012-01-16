@@ -8,6 +8,8 @@ class GitHub extends \MultiPass\Strategies\OAuth2
 
   public function __construct($opts)
   {
+    parent::__construct($opts);
+    
     // Default options
     $this->options = array_replace_recursive(array(
         'client_options' => array(
@@ -22,9 +24,7 @@ class GitHub extends \MultiPass\Strategies\OAuth2
             'mode'       => 'query'
           , 'param_name' => 'access_token'
         )
-    ), $opts);
-
-    parent::__construct($this->options);
+    ), $this->options);
   }
   
   public function uid($rawInfo = null)
