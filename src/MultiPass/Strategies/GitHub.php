@@ -54,7 +54,7 @@ class GitHub extends \MultiPass\Strategies\OAuth2
   protected function rawInfo()
   {
     try {
-      $response = $this->token->get('/user', array('parse' => 'json'));
+      $response = $this->accessToken->get('/user', array('parse' => 'json'));
       return $response->parse();
     } catch (Exception $e) {
       print_r($e);
