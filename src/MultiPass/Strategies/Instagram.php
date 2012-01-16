@@ -6,7 +6,7 @@ class Instagram extends \MultiPass\Strategies\OAuth2
 {
   const DEFAULT_SCOPE = 'basic';
 
-  public $name = 'Instagram';
+  public $name = 'instagram';
 
   public function __construct($opts)
   {
@@ -54,7 +54,7 @@ class Instagram extends \MultiPass\Strategies\OAuth2
   protected function rawInfo()
   {
     try {
-      $response       = $this->token->get('/v1/users/self', array('parse' => 'json'));
+      $response       = $this->accessToken->get('/v1/users/self', array('parse' => 'json'));
       $parsedResponse = $response->parse();
       return $parsedResponse['data'];
     } catch (\Exception $e) {
