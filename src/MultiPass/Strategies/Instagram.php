@@ -19,7 +19,7 @@ class Instagram extends \MultiPass\Strategies\OAuth2
       , 'token_params' => array(
             'parse' => 'json'
         )
-      , 'access_token_options' => array(
+      , 'token_options' => array(
             'mode'       => 'query'
           , 'param_name' => 'access_token'
         )
