@@ -6,7 +6,7 @@ class Foursquare extends \MultiPass\Strategies\OAuth2
 {
   protected $name = 'foursquare';
 
-  public function __construct($opts)
+  public function __construct($opts = array())
   {
     parent::__construct($this->options);
     

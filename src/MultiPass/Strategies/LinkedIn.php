@@ -6,7 +6,7 @@ class LinkedIn extends \MultiPass\Strategies\OAuth
 {
   protected $name = 'linkedin';
 
-  public function __construct($opts)
+  public function __construct($opts = array())
   {
     parent::__construct($opts);
 

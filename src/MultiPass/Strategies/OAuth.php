@@ -9,7 +9,7 @@ class OAuth extends \MultiPass\Strategy
   protected $client  = null;
   protected $name    = 'oauth';
 
-  public function __construct($opts)
+  public function __construct($opts = array())
   {
     parent::__construct($opts);
     

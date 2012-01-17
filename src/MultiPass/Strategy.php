@@ -8,13 +8,18 @@ abstract class Strategy
 
   protected $name = '';
 
-  public function __construct($opts)
+  public function __construct($opts = array())
   {
     // Default options
     $this->options = array_replace_recursive(array(
         'path_prefix' => '/auth'
       , 'skip_info'   => false
     ), $opts);
+  }
+
+  public function configure($opts = array())
+  {
+    $this->options = array_replace_recursive($opts, $this->options);
   }
 
   abstract public function requestPhase();

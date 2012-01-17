@@ -6,7 +6,7 @@ class GitHub extends \MultiPass\Strategies\OAuth2
 {
   protected $name = 'github';
 
-  public function __construct($opts)
+  public function __construct($opts = array())
   {
     parent::__construct($opts);
     

@@ -6,7 +6,7 @@ class Twitter extends \MultiPass\Strategies\OAuth
 {
   protected $name = 'twitter';
 
-  public function __construct($opts)
+  public function __construct($opts = array())
   {
     parent::__construct($opts);
     

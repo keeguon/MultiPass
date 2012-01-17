@@ -10,7 +10,7 @@ class OAuth2 extends \MultiPass\Strategy
   protected $name        = 'oauth2';
   protected $accessToken = null;
 
-  public function __construct($opts)
+  public function __construct($opts = array())
   {
     parent::__construct($opts);
     

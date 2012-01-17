@@ -6,7 +6,7 @@ class Dropbox extends \MultiPass\Strategies\OAuth
 {
   public $name = 'dropbox';
 
-  public function __construct($opts)
+  public function __construct($opts = array())
   {
     parent::__construct($opts);
     

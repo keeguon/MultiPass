@@ -8,7 +8,7 @@ class Facebook extends \MultiPass\Strategies\OAuth2
 
   protected $name = 'facebook';
 
-  public function __construct($opts)
+  public function __construct($opts = array())
   {
     parent::__construct($opts);
     
