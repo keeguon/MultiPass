@@ -29,6 +29,11 @@ class OAuth2 extends \MultiPass\Strategy
     $this->client = new \OAuth2\Client($this->options['client_id'], $this->options['client_secret'], $this->options['client_options']);
   }
 
+  public function getAuthType()
+  {
+    return 'oauth2';
+  }
+
   public function getClient()
   {
     return $this->client;

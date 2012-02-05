@@ -16,6 +16,10 @@ class ExampleStrategy extends \MultiPass\Strategy
     ), $this->options);
   }
 
+  public function getAuthType() {
+    return 'authExample';
+  }
+
   public function requestPhase() {}
 
   public function uid() {}
@@ -75,6 +79,15 @@ class StrategyTest extends \MultiPass\Tests\TestCase
     $this->strategy->configure(array('abc' => array('def' => 123)));
     $this->strategy->configure(array('abc' => array('ghi' => 456)));
     $this->assertArrayEquals(array('abc' => array('def' => 123, 'ghi' => 456)), $this->strategy->options['abc']);
+  }
+
+ /**
+  * @cover MultiPass\Strategy::getAuthType()
+  */
+  public function testAuthType()
+  {
+    // should return strategy auth type
+    $this->assertEquals('authExample', $this->strategy->getAuthType());
   }
 
  /**

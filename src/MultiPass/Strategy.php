@@ -22,6 +22,8 @@ abstract class Strategy
     $this->options = array_replace_recursive($opts, $this->options);
   }
 
+  abstract public function getAuthType();
+
   abstract public function requestPhase();
 
   abstract public function uid();
