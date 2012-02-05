@@ -8,8 +8,6 @@ class LinkedIn extends \MultiPass\Strategies\OAuth
 
   public function __construct($opts = array())
   {
-    parent::__construct($opts);
-
     // Default options
     $this->options = array_replace_recursive(array(
         'client_options' => array(
@@ -19,7 +17,9 @@ class LinkedIn extends \MultiPass\Strategies\OAuth
           , 'site'               => 'https://api.linkedin.com'
         )
       , 'fields' => array('id', 'first-name', 'last-name', 'headline', 'industry', 'picture-url', 'public-profile-url')
-    ), $this->options);
+    ), $opts);
+    
+    parent::__construct($this->options);
   }
   
   public function uid($rawInfo = null) {

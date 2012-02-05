@@ -8,8 +8,6 @@ class Dropbox extends \MultiPass\Strategies\OAuth
 
   public function __construct($opts = array())
   {
-    parent::__construct($opts);
-    
     // Default options
     $this->options = array_replace_recursive(array(
         'client_options' => array(
@@ -18,7 +16,9 @@ class Dropbox extends \MultiPass\Strategies\OAuth
           , 'authorize_url'      => 'https://www.dropbox.com/1/oauth/authorize' 
           , 'request_token_path' => '/1/oauth/request_token'
         )
-    ), $this->options);
+    ), $opts);
+
+    parent::__construct($this->options);
   }
 
   public function uid($rawInfo = null)
