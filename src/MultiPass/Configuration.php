@@ -28,7 +28,7 @@ class Configuration
   public function registerConfigs($configs = array())
   {
     foreach ($configs as $provider => $opts) {
-      $this->registerProvider($provider, $opts);
+      $this->registerConfig($provider, $opts);
     }
   }
 
