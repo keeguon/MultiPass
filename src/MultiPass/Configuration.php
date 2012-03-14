@@ -35,7 +35,7 @@ class Configuration
   public function register()
   {
     foreach ($this->config as $provider => $opts) {
-      $strategy = "\MultiPass\Strategies\\$provider";
+      $strategy = "\MultiPass\Strategies\\".ucfirst(strtolower($provider));
       $this->strategies[$provider] = new $strategy($opts);
     }
   }
