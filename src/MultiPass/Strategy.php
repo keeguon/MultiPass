@@ -41,7 +41,7 @@ abstract class Strategy
     }
     $hash->credentials = $this->credentials() ?: null;
     $hash->extra       = $this->extra() ?: null;
-    
+
     return $hash;
   }
 
@@ -67,7 +67,7 @@ abstract class Strategy
   public function getCurrentPath()
   {
     $parsedUrl = parse_url($_SERVER['REQUEST_URI']);
-    
+
     return $parsedUrl['path'];
   }
 
@@ -80,7 +80,7 @@ abstract class Strategy
 
   public function getFullHost()
   {
-    return $_SERVER['HTTPS'] === 'off' ? 'http://'.$_SERVER['HTTP_HOST'] : 'https://'.$_SERVER['HTTP_HOST'];
+    return (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? 'https://'.$_SERVER['HTTP_HOST'] : 'http://'.$_SERVER['HTTP_HOST'];
   }
 
   public function getCallbackUrl()
