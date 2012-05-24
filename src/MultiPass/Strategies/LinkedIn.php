@@ -18,10 +18,10 @@ class LinkedIn extends \MultiPass\Strategies\OAuth
         )
       , 'fields' => array('id', 'first-name', 'last-name', 'headline', 'industry', 'picture-url', 'public-profile-url')
     ), $opts);
-    
+
     parent::__construct($this->options);
   }
-  
+
   public function uid($rawInfo = null) {
     $rawInfo = $rawInfo ?: $this->rawInfo();
 
@@ -48,7 +48,7 @@ class LinkedIn extends \MultiPass\Strategies\OAuth
   protected function rawInfo()
   {
     try {
-      $this->client->fetch($this->options['client_options']['site'].'/v1/people/~:'.implode(',', $this->options['fields']).'?format=json')
+      $this->client->fetch($this->options['client_options']['site'].'/v1/people/~:'.implode(',', $this->options['fields']).'?format=json');
       return json_decode($this->client->getLastResponse(), true);
     } catch (\Exception $e) {
       print_r($e);
