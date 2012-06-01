@@ -24,14 +24,14 @@ class Facebook extends \MultiPass\Strategies\OAuth2
           , 'param_name'    => 'access_token'
         )
     ), $opts);
-    
+
     parent::__construct($this->options);
   }
 
   public function uid($rawInfo = null)
   {
     $rawInfo = $rawInfo ?: $this->rawInfo();
- 
+
     return $rawInfo['id'];
   }
 
@@ -40,13 +40,13 @@ class Facebook extends \MultiPass\Strategies\OAuth2
     $rawInfo = $rawInfo ?: $this->rawInfo();
 
     return array(
-        'nickname'    => $rawInfo['username']
+        'nickname'    => isset($rawInfo['username']) ? $rawInfo['username'] : $rawInfo['id']
       , 'email'       => $rawInfo['email']
       , 'name'        => $rawInfo['name']
       , 'first_name'  => $rawInfo['first_name']
       , 'last_name'   => $rawInfo['last_name']
       , 'image'       => "http://graph.facebook.com/{$rawInfo['id']}/picture?type=square"
-      , 'description' => $rawInfo['bio']
+      , 'description' => isset($rawInfo['bio']) ? $rawInfo['bio'] : null
       , 'urls'        => array(
             'Facebook' => $rawInfo['link']
           , 'Website'  => isset($rawInfo['website']) ? $rawInfo['website'] : null
@@ -54,7 +54,7 @@ class Facebook extends \MultiPass\Strategies\OAuth2
       , 'location'    => isset($rawInfo['location']) ? $rawInfo['location']['name'] : null
     );
   }
-  
+
   public function authorizeParams()
   {
     $params = parent::authorizeParams();
