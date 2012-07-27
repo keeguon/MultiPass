@@ -13,7 +13,7 @@ class OAuth2 extends \MultiPass\Strategy
   public function __construct($opts = array())
   {
     parent::__construct($opts);
-    
+
     // Default options
     $this->options = array_replace_recursive(array(
         'client_id'         => null
@@ -64,7 +64,7 @@ class OAuth2 extends \MultiPass\Strategy
   public function extra($rawInfo = null)
   {
     $rawInfo = $rawInfo ?: $this->rawInfo();
-    
+
     return array('raw_info' => $rawInfo);
   }
 
@@ -86,20 +86,16 @@ class OAuth2 extends \MultiPass\Strategy
 
   public function callbackPhase()
   {
-    try {
-      if (isset($_GET['error'])) {
-        throw new \MultiPass\Error\CallbackError($_GET['error'], isset($_GET['error_description']) ? $_GET['error_description'] : null, isset($_GET['error_uri']) ? $_GET['error_uri'] : null);
-      }
-      
-      $this->accessToken = $this->buildAccessToken();
-      if ($this->accessToken->isExpired()) {
-        $this->accessToken = $this->accessToken->refresh();
-      }
-      
-      return parent::callbackPhase();
-    } catch (\ErrorException $e) {
-      print_r($e);
+    if (isset($_GET['error'])) {
+      throw new \MultiPass\Error\CallbackError($_GET['error'], isset($_GET['error_description']) ? $_GET['error_description'] : null, isset($_GET['error_uri']) ? $_GET['error_uri'] : null);
     }
+
+    $this->accessToken = $this->buildAccessToken();
+    if ($this->accessToken->isExpired()) {
+      $this->accessToken = $this->accessToken->refresh();
+    }
+
+    return parent::callbackPhase();
   }
 
   protected function buildAccessToken()
