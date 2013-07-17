@@ -47,7 +47,7 @@ class Twitter extends \MultiPass\Strategies\OAuth
   protected function rawInfo()
   {
     try {
-      $this->client->fetch($this->options['client_options']['site'].'/1/account/verify_credentials.json');
+      $this->client->fetch($this->options['client_options']['site'].'/1.1/account/verify_credentials.json');
       return json_decode($this->client->getLastResponse(), true);
     } catch (\Exception $e) {
       print_r($e);
