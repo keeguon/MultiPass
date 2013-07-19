@@ -40,7 +40,7 @@ class Google extends \MultiPass\Strategies\OAuth2
   {
     $rawInfo = $rawInfo ?: $this->rawInfo();
  
-    return $rawInfo['id'];
+    return (array_key_exists('id', $rawInfo) ? $rawInfo['id'] : $rawInfo['sub']);
   }
 
   public function info($rawInfo = null)
