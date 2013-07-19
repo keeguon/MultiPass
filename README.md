@@ -5,7 +5,7 @@ MultiPass is a kick-ass library to authenticate yourself against third-party API
 
 ## Dependencies
 
-* PHP 5.3.x
+* PHP 5.3.x or newer
 * Official OAuth extension (<http://pecl.php.net/oauth>)
 * oauth2-php (<https://github.com/Keeguon/oauth2-php>)
 
@@ -38,18 +38,22 @@ And an handy autoload file to include in you project in vendor/.composer/autoloa
 
 ## Testing
 
-The library is fully tested with PHPUnit for unit tests. To run tests you need PHPUnit installed on your system.
-
-Go to the base library folder and run the test suites
+The library is fully tested with PHPUnit for unit tests. To run tests you need PHPUnit which can be installed using the project dependencies as follows:
 
 ```bash
-$ phpunit
+$ php composer.phar install --dev
+```
+
+Then to run the test suites
+
+```bash
+$ vendor/bin/phpunit
 ```
 
 
 ## License
 
-Copyright (c) 2012 Félix Bellanger <felix.bellanger@gmail.com>
+Copyright (c) 2013 Félix Bellanger <felix.bellanger@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
