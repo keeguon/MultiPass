@@ -52,8 +52,8 @@ class Google extends \MultiPass\Strategies\OAuth2
       , 'name'        => (empty($rawInfo['name']) ? $rawInfo['given_name'].' '.$rawInfo['family_name'] : $rawInfo['name'])
       , 'first_name'  => $rawInfo['given_name']
       , 'last_name'   => $rawInfo['family_name']
-      , 'image'       => $rawInfo['picture']
-      , 'gender'      => $rawInfo['gender']
+      , 'image'       => (array_key_exists('picture', $rawInfo) ? $rawInfo['picture'] : null)
+      , 'gender'      => (array_key_exists('gender', $rawInfo) ? $rawInfo['gender'] : null)
     );
   }
 
