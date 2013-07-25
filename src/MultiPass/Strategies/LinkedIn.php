@@ -2,56 +2,92 @@
 
 namespace MultiPass\Strategies;
 
-class LinkedIn extends \MultiPass\Strategies\OAuth
+class LinkedIn extends \MultiPass\Strategies\OAuth2
 {
-  protected $name = 'linkedin';
+  public $name = 'linkedin';
 
   public function __construct($opts = array())
   {
     // Default options
     $this->options = array_replace_recursive(array(
         'client_options' => array(
-            'access_token_path'  => '/uas/oauth/accessToken'
-          , 'authorize_url'      => 'https://www.linkedin.com/uas/oauth/authorize'
-          , 'request_token_path' => '/uas/oauth/requestToken'
-          , 'site'               => 'https://api.linkedin.com'
+            'site'          => 'https://www.linkedin.com/uas/oauth2'
+          , 'token_url'     => '/accessToken'
+          , 'authorize_url' => '/authorization'
+          , 'fields'        => 'id,first-name,last-name,picture-url,site-standard-profile-request'
+        ),
+        'token_params' => array(
+          'parse' => 'json',
+        ),
+        'token_options' => array(
+            'mode' => 'query'
+          , 'param_name' => 'oauth2_access_token'
         )
-      , 'fields' => array('id', 'first-name', 'last-name', 'headline', 'industry', 'picture-url', 'public-profile-url')
     ), $opts);
 
     parent::__construct($this->options);
   }
 
-  public function uid($rawInfo = null) {
-    $rawInfo = $rawInfo ?: $this->rawInfo();
+  public function authorizeParams()
+  {
+    $params = parent::authorizeParams();
+    if (isset($_REQUEST['state']) && $_REQUEST['state'] !== '') {
+      $params['state'] = $_REQUEST['state'];
+    } else {
+      // State is required in LinkedIn
+      $params['state'] =
+        $_SESSION['oauth'][$this->name]['state'] =
+          uniqid($this->name);
+    }
+    return $params;
+  }
 
-    return $rawInfo['id'];
+  public function uid($rawInfo = null)
+  {
+    $rawInfo = $rawInfo ?: $this->rawInfo();
+    //$matches = NULL;
+    // Get number ID from siteStandardProfile
+    //if (isset($rawInfo['siteStandardProfileRequest']['url'])) {
+    //  preg_match('/id=(\d+)/', $rawInfo['siteStandardProfileRequest']['url'], $matches);
+    //}
+    //
+    //if ($matches) {
+    //  return $matches[1];
+    //} else
+    //  // This ID is changing, if you change client_id
+      return $rawInfo['id'];
   }
 
   public function info($rawInfo = null)
   {
     $rawInfo = $rawInfo ?: $this->rawInfo();
-
+    $firstName = isset($rawInfo['firstName']) ? $rawInfo['firstName'] : '';
+    $lastName = isset($rawInfo['lastName']) ? $rawInfo['lastName'] : '';
     return array(
-        'first_name' => $rawInfo['firstName']
-      , 'last_name'  => $rawInfo['lastName']
-      , 'name'       => "{$rawInfo['firstName']} {$rawInfo['lastName']}"
-      , 'headline'   => $rawInfo['headline']
-      , 'image'      => $rawInfo['pictureUrl']
-      , 'industry'   => $rawInfo['industry']
-      , 'urls'       => array(
-            'public_profile' => $rawInfo['publicProfileUrl']
-        )
+      'id' => isset($rawInfo['id']) ? $rawInfo['id'] : NULL,
+      'first_name' => $firstName,
+      'last_name' => $lastName,
+      'name' => empty($rawInfo['name'])
+        ? $firstName . ' ' . $lastName
+        : $rawInfo['name'],
+      'email' => isset($rawInfo['emailAddress']) ? $rawInfo['emailAddress'] : NULL,
+      'image' => isset($rawInfo['pictureUrl']) ? $rawInfo['pictureUrl'] : NULL,
     );
+  }
+
+  public function callbackPhase() {
+    if (!isset($_GET['state']) || $_GET['state'] !== $_SESSION['oauth'][$this->name]['state']) {
+      throw new \MultiPass\Error\CSRFError('CSRF protection', 'Returned "state" value is not correct. Possible CSRF');
+    }
+    return parent::callbackPhase();
   }
 
   protected function rawInfo()
   {
-    try {
-      $this->client->fetch($this->options['client_options']['site'].'/v1/people/~:'.implode(',', $this->options['fields']).'?format=json');
-      return json_decode($this->client->getLastResponse(), true);
-    } catch (\Exception $e) {
-      print_r($e);
-    }
+    $response = $this->accessToken->get('https://api.linkedin.com/v1/people/~:(' . $this->options['client_options']['fields'] . ')', array(
+      'parse' => 'json',
+      'params' => array( 'format' => 'json' )
+    ));
+    return $response->parse();
   }
 }
