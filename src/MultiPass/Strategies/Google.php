@@ -24,7 +24,7 @@ class Google extends \MultiPass\Strategies\OAuth2
             'site'          => 'https://accounts.google.com/o/oauth2'
           , 'token_url'     => '/token'
           , 'authorize_url' => '/auth'
-          , 'token_method'  => 'POST'
+          , 'client_auth'   => 'body'
         )
       , 'authorize_params' => array('scope' => 'openid profile email')
       , 'token_options' => array(
@@ -39,7 +39,7 @@ class Google extends \MultiPass\Strategies\OAuth2
   public function uid($rawInfo = null)
   {
     $rawInfo = $rawInfo ?: $this->rawInfo();
- 
+
     return (array_key_exists('id', $rawInfo) ? $rawInfo['id'] : $rawInfo['sub']);
   }
 
