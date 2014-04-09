@@ -12,8 +12,9 @@ class GitHub extends \MultiPass\Strategies\OAuth2
     $this->options = array_replace_recursive(array(
         'client_options' => array(
             'site'          => 'https://api.github.com'
-          , 'authorize_url' => 'https://github.com/login/oauth/authorize' 
+          , 'authorize_url' => 'https://github.com/login/oauth/authorize'
           , 'token_url'     => 'https://github.com/login/oauth/access_token'
+          , 'client_auth'   => 'query'
         )
       , 'token_params' => array(
             'parse' => 'query'
@@ -23,14 +24,14 @@ class GitHub extends \MultiPass\Strategies\OAuth2
           , 'param_name' => 'access_token'
         )
     ), $opts);
-   
+
     parent::__construct($this->options);
   }
-  
+
   public function uid($rawInfo = null)
   {
     $rawInfo = $rawInfo ?: $this->rawInfo();
- 
+
     return $rawInfo['id'];
   }
 

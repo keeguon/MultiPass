@@ -13,8 +13,9 @@ class Instagram extends \MultiPass\Strategies\OAuth2
     // Default options
     $this->options = array_replace_recursive(array(
         'client_options' => array(
-            'site'      => 'https://api.instagram.com'
-          , 'token_url' => '/oauth/access_token'
+            'site'        => 'https://api.instagram.com'
+          , 'token_url'   => '/oauth/access_token'
+          , 'client_auth' => 'query'
         )
       , 'token_params' => array(
             'parse' => 'json'

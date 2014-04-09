@@ -31,7 +31,7 @@ class Foursquare extends \MultiPass\Strategies\OAuth2
   public function uid($rawInfo = null)
   {
     $rawInfo = $rawInfo ?: $this->rawInfo();
- 
+
     return $rawInfo['id'];
   }
 
@@ -49,7 +49,7 @@ class Foursquare extends \MultiPass\Strategies\OAuth2
   protected function rawInfo()
   {
     try {
-      $response       = $this->accessToken->get('https://api.foursquare.com/v2/users/self', array('parse' => 'json'));
+      $response       = $this->accessToken->get('https://api.foursquare.com/v2/users/self', array('v' => strftime('%Y-%m-%d'), 'parse' => 'json'));
       $parsedResponse = $response->parse();
       return $parsedResponse['response']['user'];
     } catch (\Exception $e) {
