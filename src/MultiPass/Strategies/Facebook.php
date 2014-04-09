@@ -4,7 +4,7 @@ namespace MultiPass\Strategies;
 
 class Facebook extends \MultiPass\Strategies\OAuth2
 {
-  const DEFAULT_SCOPE = 'email,offline_access';
+  const DEFAULT_SCOPE = 'email';
 
   protected $name = 'facebook';
 
