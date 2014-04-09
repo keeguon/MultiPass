@@ -13,8 +13,9 @@ class Facebook extends \MultiPass\Strategies\OAuth2
     // Default options
     $this->options = array_replace_recursive(array(
         'client_options' => array(
-            'site'      => 'https://graph.facebook.com'
-          , 'token_url' => '/oauth/access_token'
+            'site'        => 'https://graph.facebook.com'
+          , 'token_url'   => '/oauth/access_token'
+          , 'client_auth' => 'query'
         )
       , 'token_params' => array(
             'parse' => 'query'
