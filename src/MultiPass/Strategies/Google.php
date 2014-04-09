@@ -27,10 +27,6 @@ class Google extends \MultiPass\Strategies\OAuth2
           , 'client_auth'   => 'body'
         )
       , 'authorize_params' => array('scope' => 'openid profile email')
-      , 'token_options' => array(
-            'mode'       => 'query'
-          , 'param_name' => 'code'
-        )
     ), $opts);
 
     parent::__construct($this->options);
@@ -60,7 +56,7 @@ class Google extends \MultiPass\Strategies\OAuth2
   protected function rawInfo()
   {
     try {
-      $response = $this->accessToken->get('https://www.googleapis.com/oauth2/v3/userinfo', array('parse' => 'json', 'params' => array('access_token'=>$this->accessToken->getToken())));
+      $response = $this->accessToken->get('https://www.googleapis.com/oauth2/v3/userinfo', array('parse' => 'json'));
       $parsedResponse = $response->parse();
       return $parsedResponse;
     } catch (\Exception $e) {

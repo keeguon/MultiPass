@@ -55,9 +55,8 @@ class OAuth2 extends \MultiPass\Strategy
       $hash['refresh_token'] = $this->accessToken->getRefreshToken();
     }
     if ($this->accessToken->expires()) {
-      $hash['expires_at'] = $this->accessToken->getExpiresAt();
+      $hash['expires_in'] = $this->accessToken->getExpiresIn();
     }
-    $hash['expires'] = $this->accessToken->expires();
     return $hash;
   }
 
