@@ -13,7 +13,7 @@ class Facebook extends \MultiPass\Strategies\OAuth2
     // Default options
     $this->options = array_replace_recursive(array(
         'client_options' => array(
-            'site'        => 'https://graph.facebook.com'
+            'site'        => 'https://graph.facebook.com/v2.1'
           , 'token_url'   => '/oauth/access_token'
           , 'client_auth' => 'query'
         )

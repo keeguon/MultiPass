@@ -5,7 +5,7 @@ MultiPass is a kick-ass library to authenticate yourself against third-party API
 
 ## Dependencies
 
-* PHP 5.3.x or newer
+* PHP 5.4.x or newer
 * Official OAuth extension (<http://pecl.php.net/oauth>)
 * oauth2-php (<https://github.com/Keeguon/oauth2-php>)
 

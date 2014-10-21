@@ -4,7 +4,7 @@
   , "description": "A kick-ass PHP library to connect to third-party applications."
   , "keywords": ["oauth", "oauth2", "multipass", "connect"]
   , "homepage": "https://github.com/Keeguon/MultiPass"
-  , "version": "1.4.0"
+  , "version": "1.4.1"
   , "license": "MIT"
   , "authors": [
         {
